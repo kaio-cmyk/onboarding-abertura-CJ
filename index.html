@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluxograma de Abertura de Empresa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1638;
+    --orange:#F2921C;
+    --green:#0FA968;
+    --blue-soft:#EAF0FF;
+    --blue-line:#C9D6FA;
+    --gold-soft:#FBF3DD;
+    --gold-line:#EEDBA1;
+    --ink:#11142B;
+    --ink-soft:#5A6079;
+    --line:#DDE2F0;
+    --connector:#66739D;
+    --paper:#FFFFFF;
+    --background:#F5F7FC;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,
+  body{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    overflow-x:hidden;
+    background:var(--background);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    padding:clamp(10px, 1.6vw, 24px);
+  }
+
+  .flow-shell{
+    width:100%;
+    max-width:1800px;
+    margin:0 auto;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:0 18px 50px rgba(15,22,56,.08);
+    overflow:hidden;
+  }
+
+  .flow-scroll{
+    width:100%;
+    overflow:hidden;
+  }
+
+  .flow-svg{
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    min-width:0;
+    aspect-ratio:2250 / 1180;
+  }
+
+  .node-title{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+  }
+
+  .node-sub{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+  }
+
+  .node-date{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+  }
+
+  .deadline-box{
+    fill:#FFFFFF;
+    stroke:#D9DEEE;
+    stroke-width:1.5;
+  }
+
+  .deadline-text{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600;
+    fill:#414967;
+  }
+
+
+  .content-section{
+    width:min(1180px, calc(100% - 24px));
+    margin:20px auto 0;
+  }
+
+  .notice{
+    background:#FDECD3;
+    border:1px solid #F3D6A0;
+    border-radius:16px;
+    padding:18px 20px;
+    display:flex;
+    gap:13px;
+    align-items:flex-start;
+    box-shadow:0 8px 24px rgba(15,22,56,.05);
+  }
+
+  .notice-icon{
+    font-size:18px;
+    line-height:1.3;
+    flex:none;
+  }
+
+  .notice strong{
+    display:block;
+    margin-bottom:5px;
+    color:#704707;
+    font-family:'Sora',sans-serif;
+    font-size:14px;
+  }
+
+  .notice p{
+    margin:0;
+    color:#805B15;
+    font-size:13px;
+    line-height:1.65;
+  }
+
+  .investment-section{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:24px;
+    box-shadow:0 12px 34px rgba(15,22,56,.07);
+  }
+
+  .section-kicker{
+    margin-bottom:6px;
+    color:#3450E6;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+  }
+
+  .investment-section h2{
+    margin:0 0 7px;
+    font-family:'Sora',sans-serif;
+    font-size:clamp(21px, 2.4vw, 28px);
+    line-height:1.2;
+  }
+
+  .section-description{
+    max-width:760px;
+    margin:0 0 23px;
+    color:var(--ink-soft);
+    font-size:14px;
+    line-height:1.65;
+  }
+
+  .investment-grid{
+    display:grid;
+    grid-template-columns:minmax(0, 1.35fr) minmax(280px, .8fr);
+    gap:22px;
+    align-items:stretch;
+  }
+
+  .cost-table{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:#FFFFFF;
+  }
+
+  .cost-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:16px 18px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .cost-row:last-child{border-bottom:0;}
+
+  .cost-name{
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .cost-detail{
+    margin-top:3px;
+    color:var(--ink-soft);
+    font-size:12px;
+    line-height:1.45;
+  }
+
+  .cost-value{
+    flex:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  .cost-row.waived .cost-value{
+    color:#A5ABC0;
+    text-decoration:line-through;
+  }
+
+  .cost-row.total{
+    margin:7px;
+    padding:17px 13px;
+    border:0;
+    border-radius:11px;
+    background:var(--navy);
+    color:#FFFFFF;
+  }
+
+  .bonus-card{
+    padding:24px;
+    border:1px solid var(--gold-line);
+    border-radius:16px;
+    background:linear-gradient(145deg, var(--gold-soft), #FFF9EB);
+  }
+
+  .bonus-card h3{
+    margin:0 0 9px;
+    color:#705409;
+    font-family:'Sora',sans-serif;
+    font-size:17px;
+  }
+
+  .bonus-card p{
+    margin:0;
+    color:#745A16;
+    font-size:13px;
+    line-height:1.7;
+  }
+
+  .bonus-badge{
+    display:inline-flex;
+    margin-top:16px;
+    padding:6px 11px;
+    border-radius:999px;
+    background:#FFFFFF;
+    color:#705409;
+    font-size:11px;
+    font-weight:700;
+  }
+
+  @media (max-width:1000px){
+    .flow-shell{border-radius:18px;}
+    .content-section{width:100%;}
+  }
+
+  @media (max-width:720px){
+    body{padding:8px;}
+    .flow-shell{border-radius:14px;}
+    .flow-svg{
+      width:100%;
+      height:auto;
+    }
+    .notice{padding:15px;}
+    .investment-section{padding:20px 15px;}
+    .investment-grid{grid-template-columns:1fr;}
+    .cost-row{align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="flow-shell">
+  <div class="flow-scroll">
+    <svg class="flow-svg" viewBox="0 0 2250 1180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Fluxograma completo do processo de abertura de empresa">
+      <defs>
+        <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#0F1638" flood-opacity="0.14"/>
+        </filter>
+        <marker id="arrowhead" viewBox="0 0 10 10" refX="9.4" refY="5" markerWidth="11" markerHeight="11" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#66739D"/>
+        </marker>
+      </defs>
+
+      <!-- CONECTORES -->
+      <g fill="none" stroke="var(--connector)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowhead)">
+        <path d="M340,170 H440"/>
+        <path d="M720,170 H850"/>
+        <path d="M1090,170 H1220"/>
+        <path d="M1460,170 H1560"/>
+
+        <path d="M1700,300 V420"/>
+        <path d="M1560,485 H1460"/>
+        <path d="M1220,485 H1090"/>
+
+        <path d="M970,550 V675 H500 V790"/>
+        <path d="M620,850 H750"/>
+        <path d="M1030,850 H1160"/>
+
+        <path d="M1400,850 H1440 V695 H1500"/>
+        <path d="M1400,850 H1500"/>
+        <path d="M1400,850 H1440 V1005 H1500"/>
+
+        <path d="M1740,695 H1790 V820 H1855"/>
+        <path d="M1740,850 H1840"/>
+        <path d="M1740,1005 H1790 V880 H1855"/>
+        <path d="M1740,1005 H1880"/>
+      </g>
+
+      <!-- PRAZOS -->
+      <g text-anchor="middle">
+        <rect class="deadline-box" x="338" y="74" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="390" y="96" font-size="13">2 dias úteis</text>
+
+        <rect class="deadline-box" x="733" y="74" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="785" y="96" font-size="13">3 dias úteis</text>
+
+        <rect class="deadline-box" x="1103" y="74" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="1155" y="96" font-size="13">3 dias úteis</text>
+
+        <rect class="deadline-box" x="1458" y="74" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="1510" y="96" font-size="13">5 dias úteis</text>
+
+        <rect class="deadline-box" x="1730" y="335" width="94" height="34" rx="17"/>
+        <text class="deadline-text" x="1777" y="357" font-size="14">Deferido</text>
+
+        <rect class="deadline-box" x="1458" y="382" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="1510" y="404" font-size="13">5 dias úteis</text>
+
+        <rect class="deadline-box" x="1103" y="382" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="1155" y="404" font-size="13">3 dias úteis</text>
+
+        <rect class="deadline-box" x="688" y="620" width="116" height="34" rx="17"/>
+        <text class="deadline-text" x="746" y="642" font-size="13">25 dias úteis</text>
+
+        <rect class="deadline-box" x="634" y="742" width="104" height="34" rx="17"/>
+        <text class="deadline-text" x="686" y="764" font-size="13">3 dias úteis</text>
+
+        <rect class="deadline-box" x="1036" y="742" width="116" height="34" rx="17"/>
+        <text class="deadline-text" x="1094" y="764" font-size="13">25 dias úteis</text>
+      </g>
+
+      <!-- NÓS: PRIMEIRA LINHA -->
+      <g data-day="0">
+        <rect filter="url(#softShadow)" x="100" y="110" width="240" height="120" rx="60" fill="var(--navy)"/>
+        <text class="node-title" x="220" y="155" text-anchor="middle" font-size="20" fill="#FFFFFF">Conta Junto!</text>
+        <text class="node-sub" x="220" y="183" text-anchor="middle" font-size="14" fill="#C7CEE9">Início do processo</text>
+        <text class="ndate node-date" x="220" y="208" text-anchor="middle" font-size="13" fill="#929BC5"></text>
+      </g>
+
+      <g data-day="2">
+        <polygon filter="url(#softShadow)" points="580,40 720,170 580,300 440,170" fill="var(--orange)"/>
+        <text class="node-title" x="580" y="154" text-anchor="middle" font-size="18" fill="#3B2100">Protocolo da</text>
+        <text class="node-title" x="580" y="178" text-anchor="middle" font-size="18" fill="#3B2100">Junta Comercial</text>
+        <text class="ndate node-date" x="580" y="208" text-anchor="middle" font-size="13" fill="#5E3C0A"></text>
+      </g>
+
+      <g data-day="5">
+        <rect filter="url(#softShadow)" x="850" y="110" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="970" y="154" text-anchor="middle" font-size="19" fill="var(--ink)">Taxa de Abertura</text>
+        <text class="node-sub" x="970" y="184" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 218,00</text>
+        <text class="ndate node-date" x="970" y="209" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="8">
+        <rect filter="url(#softShadow)" x="1220" y="110" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1340" y="151" text-anchor="middle" font-size="18" fill="var(--ink)">Assinatura Digital</text>
+        <text class="node-title" x="1340" y="176" text-anchor="middle" font-size="18" fill="var(--ink)">dos Documentos</text>
+        <text class="ndate node-date" x="1340" y="207" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="13">
+        <polygon filter="url(#softShadow)" points="1700,40 1840,170 1700,300 1560,170" fill="var(--orange)"/>
+        <text class="node-title" x="1700" y="154" text-anchor="middle" font-size="18" fill="#3B2100">Processo</text>
+        <text class="node-title" x="1700" y="178" text-anchor="middle" font-size="18" fill="#3B2100">Deferido?</text>
+        <text class="ndate node-date" x="1700" y="208" text-anchor="middle" font-size="13" fill="#5E3C0A"></text>
+      </g>
+
+      <!-- NÓS: SEGUNDA LINHA -->
+      <g data-day="13">
+        <rect filter="url(#softShadow)" x="1560" y="425" width="280" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1700" y="468" text-anchor="middle" font-size="18" fill="var(--ink)">Assinatura Digital</text>
+        <text class="node-title" x="1700" y="493" text-anchor="middle" font-size="18" fill="var(--ink)">do CNPJ</text>
+        <text class="ndate node-date" x="1700" y="523" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="18">
+        <rect filter="url(#softShadow)" x="1220" y="425" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1340" y="468" text-anchor="middle" font-size="18" fill="var(--ink)">Assinar Contrato</text>
+        <text class="node-title" x="1340" y="493" text-anchor="middle" font-size="18" fill="var(--ink)">de Serviços</text>
+        <text class="ndate node-date" x="1340" y="523" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="21">
+        <rect filter="url(#softShadow)" x="850" y="425" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="970" y="462" text-anchor="middle" font-size="17" fill="var(--ink)">Certificado Digital</text>
+        <text class="node-title" x="970" y="486" text-anchor="middle" font-size="17" fill="var(--ink)">e Procuração</text>
+        <text class="ndate node-date" x="970" y="520" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <!-- NÓS: TERCEIRA LINHA -->
+      <g data-day="46">
+        <rect filter="url(#softShadow)" x="380" y="790" width="240" height="120" rx="60" fill="var(--navy)"/>
+        <text class="node-title" x="500" y="833" text-anchor="middle" font-size="18" fill="#FFFFFF">Reunião de</text>
+        <text class="node-title" x="500" y="858" text-anchor="middle" font-size="18" fill="#FFFFFF">Direcionamento</text>
+        <text class="ndate node-date" x="500" y="889" text-anchor="middle" font-size="13" fill="#929BC5"></text>
+      </g>
+
+      <g data-day="49">
+        <polygon filter="url(#softShadow)" points="890,720 1030,850 890,980 750,850" fill="var(--orange)"/>
+        <text class="node-title" x="890" y="835" text-anchor="middle" font-size="18" fill="#3B2100">Inscrição</text>
+        <text class="node-title" x="890" y="859" text-anchor="middle" font-size="18" fill="#3B2100">Municipal</text>
+        <text class="ndate node-date" x="890" y="889" text-anchor="middle" font-size="13" fill="#5E3C0A"></text>
+      </g>
+
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1160" y="790" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1280" y="833" text-anchor="middle" font-size="19" fill="var(--ink)">Taxas</text>
+        <text class="node-title" x="1280" y="858" text-anchor="middle" font-size="19" fill="var(--ink)">Municipais</text>
+        <text class="ndate node-date" x="1280" y="889" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <!-- RAMIFICAÇÕES MUNICIPAIS -->
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1500" y="635" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1620" y="681" text-anchor="middle" font-size="18" fill="var(--ink)">Funcionamento</text>
+        <text class="node-sub" x="1620" y="711" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 474,00</text>
+        <text class="ndate node-date" x="1620" y="737" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1500" y="790" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <text class="node-title" x="1620" y="836" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa Mobiliária</text>
+        <text class="node-sub" x="1620" y="866" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 118,50</text>
+        <text class="ndate node-date" x="1620" y="892" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1500" y="945" width="240" height="120" rx="20" fill="var(--gold-soft)" stroke="var(--gold-line)" stroke-width="2"/>
+        <text class="node-title" x="1620" y="991" text-anchor="middle" font-size="18" fill="var(--ink)">Publicidade</text>
+        <text class="node-sub" x="1620" y="1021" text-anchor="middle" font-size="17" fill="#B7754B" text-decoration="line-through">R$ 226,00</text>
+        <text class="ndate node-date" x="1620" y="1047" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
+      </g>
+
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1880" y="945" width="230" height="120" rx="20" fill="var(--navy)"/>
+        <text class="node-title" x="1995" y="988" text-anchor="middle" font-size="18" fill="#F2C34D">Bônus</text>
+        <text class="node-title" x="1995" y="1015" text-anchor="middle" font-size="16" fill="#FFFFFF">Isenção de</text>
+        <text class="node-title" x="1995" y="1037" text-anchor="middle" font-size="16" fill="#FFFFFF">Publicidade</text>
+      </g>
+
+      <g data-day="74">
+        <rect filter="url(#softShadow)" x="1840" y="780" width="320" height="140" rx="70" fill="var(--green)"/>
+        <text class="node-title" x="2000" y="830" text-anchor="middle" font-size="20" fill="#FFFFFF">Processo Finalizado</text>
+        <text class="node-title" x="2000" y="858" text-anchor="middle" font-size="20" fill="#FFFFFF">e Empresa Apta</text>
+        <text class="ndate node-date" x="2000" y="892" text-anchor="middle" font-size="13" fill="#D7F5E7"></text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<section class="content-section notice" aria-label="Prazos estimados">
+  <span class="notice-icon">⚠️</span>
+  <div>
+    <strong>Prazos estimados</strong>
+    <p>Os prazos acima são estimativas baseadas no fluxo padrão dos órgãos envolvidos (Junta Comercial, Receita Federal e Prefeitura) e podem variar conforme a demanda de cada órgão. Qualquer alteração relevante será comunicada pelo WhatsApp.</p>
+  </div>
+</section>
+
+<section class="content-section investment-section" aria-labelledby="custos-processo">
+  <div class="section-kicker">Investimento e detalhamento</div>
+  <h2 id="custos-processo">Custos do processo de abertura</h2>
+  <p class="section-description">Valores oficiais cobrados pelos órgãos durante as etapas do processo. A taxa de publicidade é apresentada no detalhamento, mas será assumida pela Conta Junto como bônus.</p>
+
+  <div class="investment-grid">
+    <div class="cost-table">
+      <div class="cost-row">
+        <div>
+          <div class="cost-name">Taxa de abertura</div>
+          <div class="cost-detail">Junta Comercial — vinculada ao protocolo de abertura da empresa.</div>
+        </div>
+        <div class="cost-value">R$ 218,00</div>
+      </div>
+
+      <div class="cost-row">
+        <div>
+          <div class="cost-name">Taxa de Funcionamento</div>
+          <div class="cost-detail">Prefeitura Municipal — etapa necessária para o funcionamento da empresa.</div>
+        </div>
+        <div class="cost-value">R$ 474,00</div>
+      </div>
+
+      <div class="cost-row">
+        <div>
+          <div class="cost-name">Taxa Mobiliária</div>
+          <div class="cost-detail">Prefeitura Municipal — cobrança relacionada ao cadastro mobiliário municipal.</div>
+        </div>
+        <div class="cost-value">R$ 118,50</div>
+      </div>
+
+      <div class="cost-row waived">
+        <div>
+          <div class="cost-name">Taxa de Publicidade</div>
+          <div class="cost-detail">Prefeitura Municipal — custo de R$ 226,00 assumido pela Conta Junto como bônus.</div>
+        </div>
+        <div class="cost-value">R$ 226,00</div>
+      </div>
+
+      <div class="cost-row total">
+        <div class="cost-name">Total a investir pelo cliente</div>
+        <div class="cost-value">R$ 810,50</div>
+      </div>
+    </div>
+
+    <aside class="bonus-card">
+      <h3>Bônus Conta Junto</h3>
+      <p>Como parte do onboarding, a Conta Junto assume o custo da taxa municipal de publicidade. Dessa forma, o investimento total é reduzido de R$ 1.036,50 para R$ 810,50.</p>
+      <span class="bonus-badge">Economia de R$ 226,00</span>
+    </aside>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-day]').forEach(node => {
+    const day = Number.parseInt(node.dataset.day, 10);
+    const dateElement = node.querySelector('.ndate');
+
+    if (!dateElement) return;
+
+    dateElement.textContent = day === 0
+      ? 'Início'
+      : `${day} dias úteis`;
+  });
+</script>
+
+</body>
+</html>
