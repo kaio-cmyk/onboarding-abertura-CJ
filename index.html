@@ -258,23 +258,28 @@
 
 
 
-  /* ===== Interação da Taxa de Abertura ===== */
-  .tax-node{
+  /* ===== Etapas interativas e janelas explicativas ===== */
+  .tax-node,
+  .certificate-node{
     cursor:pointer;
   }
 
-  .tax-node rect{
+  .tax-node rect,
+  .certificate-node rect{
     transition:stroke .2s ease, stroke-width .2s ease, filter .2s ease;
   }
 
   .tax-node:hover rect,
-  .tax-node:focus rect{
+  .tax-node:focus rect,
+  .certificate-node:hover rect,
+  .certificate-node:focus rect{
     stroke:#3450E6;
     stroke-width:5;
     filter:url(#softShadow);
   }
 
-  .tax-node:focus{
+  .tax-node:focus,
+  .certificate-node:focus{
     outline:none;
   }
 
@@ -522,8 +527,10 @@
         <text class="ndate node-date" x="1340" y="523" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
       </g>
 
-      <g data-day="21">
+      <g id="certificadoNode" class="certificate-node" data-day="21" role="button" tabindex="0" aria-label="Certificado Digital e Procuração. Clique para entender a finalidade do certificado digital.">
         <rect filter="url(#softShadow)" x="850" y="425" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1063" cy="449" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1063" y="455" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="970" y="462" text-anchor="middle" font-size="17" fill="var(--ink)">Certificado Digital</text>
         <text class="node-title" x="970" y="486" text-anchor="middle" font-size="17" fill="var(--ink)">e Procuração</text>
         <text class="ndate node-date" x="970" y="520" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
@@ -604,6 +611,20 @@
   </div>
 </div>
 
+<div id="certificadoModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="certificadoModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeCertificadoModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Segurança e obrigações</div>
+    <h2 id="certificadoModalTitle">Para que serve o Certificado Digital?</h2>
+
+    <p>O Certificado Digital funciona como uma assinatura eletrônica com total validade jurídica. Ele é indispensável para a emissão de documentos fiscais, transmissão de declarações obrigatórias e cumprimento de exigências da RFB (Receita Federal do Brasil).</p>
+
+    <p>Além disso, nossa assessoria contábil precisa desse acesso para realizar o envio das obrigações fiscais e contábeis de maneira ágil e segura.</p>
+
+    <div class="info-modal-highlight">Esse acesso ajuda a proteger sua empresa contra inconformidades operacionais e possíveis penalidades.</div>
+  </div>
+</div>
+
 <section class="content-section notice" aria-label="Prazos estimados">
   <span class="notice-icon">⚠️</span>
   <div>
@@ -659,7 +680,7 @@
 
     <aside class="bonus-card">
       <h3>Bônus Conta Junto</h3>
-      <p>Como parte do onboarding da Conta Junto Assessoria Contábil, por sua empresa ser do meio Digital e não possui publicidade física no Municipio de Sumaré iremos solicitar a Isenção da Taxa de Publicidade</p>
+      <p>Como parte do onboarding, a Conta Junto assume o custo da taxa municipal de publicidade. Dessa forma, o investimento total é reduzido de R$ 1.036,50 para R$ 810,50.</p>
       <span class="bonus-badge">Economia de R$ 226,00</span>
     </aside>
   </div>
@@ -677,41 +698,58 @@
       : `${day} dias úteis`;
   });
 
-  const taxaAberturaNode = document.getElementById('taxaAberturaNode');
-  const dareModal = document.getElementById('dareModal');
-  const closeDareModal = document.getElementById('closeDareModal');
+  function configureInfoModal({ triggerId, modalId, closeButtonId }) {
+    const trigger = document.getElementById(triggerId);
+    const modal = document.getElementById(modalId);
+    const closeButton = document.getElementById(closeButtonId);
 
-  function openDareExplanation(){
-    dareModal.hidden = false;
-    document.body.classList.add('modal-open');
-    closeDareModal.focus();
-  }
-
-  function closeDareExplanation(){
-    dareModal.hidden = true;
-    document.body.classList.remove('modal-open');
-    taxaAberturaNode.focus();
-  }
-
-  taxaAberturaNode.addEventListener('click', openDareExplanation);
-
-  taxaAberturaNode.addEventListener('keydown', event => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openDareExplanation();
+    function openModal() {
+      modal.hidden = false;
+      document.body.classList.add('modal-open');
+      closeButton.focus();
     }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('modal-open');
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', openModal);
+
+    trigger.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openModal();
+      }
+    });
+
+    closeButton.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeModal();
+    });
+
+    return { modal, closeModal };
+  }
+
+  const dareInfo = configureInfoModal({
+    triggerId: 'taxaAberturaNode',
+    modalId: 'dareModal',
+    closeButtonId: 'closeDareModal'
   });
 
-  closeDareModal.addEventListener('click', closeDareExplanation);
-
-  dareModal.addEventListener('click', event => {
-    if (event.target === dareModal) closeDareExplanation();
+  const certificadoInfo = configureInfoModal({
+    triggerId: 'certificadoNode',
+    modalId: 'certificadoModal',
+    closeButtonId: 'closeCertificadoModal'
   });
 
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !dareModal.hidden) {
-      closeDareExplanation();
-    }
+    if (event.key !== 'Escape') return;
+
+    if (!dareInfo.modal.hidden) dareInfo.closeModal();
+    if (!certificadoInfo.modal.hidden) certificadoInfo.closeModal();
   });
 </script>
 
