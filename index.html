@@ -256,6 +256,128 @@
     font-weight:700;
   }
 
+
+
+  /* ===== Interação da Taxa de Abertura ===== */
+  .tax-node{
+    cursor:pointer;
+  }
+
+  .tax-node rect{
+    transition:stroke .2s ease, stroke-width .2s ease, filter .2s ease;
+  }
+
+  .tax-node:hover rect,
+  .tax-node:focus rect{
+    stroke:#3450E6;
+    stroke-width:5;
+    filter:url(#softShadow);
+  }
+
+  .tax-node:focus{
+    outline:none;
+  }
+
+  .node-info-icon{
+    pointer-events:none;
+  }
+
+  .info-modal{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(15,22,56,.68);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(5px);
+  }
+
+  .info-modal[hidden]{
+    display:none;
+  }
+
+  .info-modal-card{
+    position:relative;
+    width:min(760px, 100%);
+    max-height:min(82vh, 760px);
+    overflow-y:auto;
+    padding:clamp(24px, 4vw, 38px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:22px;
+    background:#FFFFFF;
+    box-shadow:0 28px 90px rgba(15,22,56,.32);
+  }
+
+  .info-modal-kicker{
+    margin-bottom:8px;
+    color:#3450E6;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+
+  .info-modal-card h2{
+    margin:0 44px 18px 0;
+    font-family:'Sora',sans-serif;
+    font-size:clamp(22px, 4vw, 30px);
+    line-height:1.2;
+    color:var(--navy);
+  }
+
+  .info-modal-card p{
+    margin:0 0 16px;
+    color:#434B68;
+    font-size:14px;
+    line-height:1.78;
+  }
+
+  .info-modal-card p:last-child{
+    margin-bottom:0;
+  }
+
+  .info-modal-highlight{
+    margin-top:20px;
+    padding:15px 17px;
+    border-left:4px solid var(--orange);
+    border-radius:0 12px 12px 0;
+    background:#FFF6E9;
+    color:#704707;
+    font-size:13px;
+    font-weight:700;
+    line-height:1.6;
+  }
+
+  .info-modal-close{
+    position:absolute;
+    top:18px;
+    right:18px;
+    width:38px;
+    height:38px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:#F6F7FC;
+    color:var(--navy);
+    font-size:23px;
+    line-height:1;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+
+  .info-modal-close:hover,
+  .info-modal-close:focus{
+    background:#EAF0FF;
+    transform:scale(1.05);
+    outline:none;
+  }
+
+  body.modal-open{
+    overflow:hidden;
+  }
+
   @media (max-width:1000px){
     .flow-shell{border-radius:18px;}
     .content-section{width:100%;}
@@ -362,8 +484,10 @@
         <text class="ndate node-date" x="580" y="208" text-anchor="middle" font-size="13" fill="#5E3C0A"></text>
       </g>
 
-      <g data-day="5">
+      <g id="taxaAberturaNode" class="tax-node" data-day="5" role="button" tabindex="0" aria-label="Taxa de Abertura. Clique para entender o DARE.">
         <rect filter="url(#softShadow)" x="850" y="110" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1063" cy="134" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1063" y="140" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="970" y="154" text-anchor="middle" font-size="19" fill="var(--ink)">Taxa de Abertura</text>
         <text class="node-sub" x="970" y="184" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 218,00</text>
         <text class="ndate node-date" x="970" y="209" text-anchor="middle" font-size="13" fill="#7C86A5"></text>
@@ -466,6 +590,20 @@
   </div>
 </div>
 
+<div id="dareModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="dareModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeDareModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Detalhamento da taxa</div>
+    <h2 id="dareModalTitle">O que é o DARE?</h2>
+
+    <p>O DARE (Documento de Arrecadação de Receitas Estaduais) é uma taxa obrigatória destinada ao recolhimento de tributos e receitas estaduais. No contexto de abertura de empresas, esse documento é emitido para cobrir os custos administrativos de registro do negócio junto à Junta Comercial do seu estado.</p>
+
+    <p>Como cada estado brasileiro possui autonomia sobre suas taxas e tabelas de serviços, o valor do DARE varia conforme a localidade onde sua empresa estará sediada. O pagamento desta taxa é um requisito indispensável para dar andamento ao arquivamento dos atos constitutivos e à emissão do seu CNPJ (Cadastro Nacional da Pessoa Jurídica).</p>
+
+    <div class="info-modal-highlight">A ausência do pagamento impede a Junta Comercial de processar e aprovar o registro legal da empresa.</div>
+  </div>
+</div>
+
 <section class="content-section notice" aria-label="Prazos estimados">
   <span class="notice-icon">⚠️</span>
   <div>
@@ -537,6 +675,43 @@
     dateElement.textContent = day === 0
       ? 'Início'
       : `${day} dias úteis`;
+  });
+
+  const taxaAberturaNode = document.getElementById('taxaAberturaNode');
+  const dareModal = document.getElementById('dareModal');
+  const closeDareModal = document.getElementById('closeDareModal');
+
+  function openDareExplanation(){
+    dareModal.hidden = false;
+    document.body.classList.add('modal-open');
+    closeDareModal.focus();
+  }
+
+  function closeDareExplanation(){
+    dareModal.hidden = true;
+    document.body.classList.remove('modal-open');
+    taxaAberturaNode.focus();
+  }
+
+  taxaAberturaNode.addEventListener('click', openDareExplanation);
+
+  taxaAberturaNode.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openDareExplanation();
+    }
+  });
+
+  closeDareModal.addEventListener('click', closeDareExplanation);
+
+  dareModal.addEventListener('click', event => {
+    if (event.target === dareModal) closeDareExplanation();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !dareModal.hidden) {
+      closeDareExplanation();
+    }
   });
 </script>
 
