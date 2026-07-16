@@ -205,7 +205,13 @@
   .cost-value{
     flex:none;
     font-family:'IBM Plex Mono',monospace;
-    font-size:14px;
+    font-size:16.8px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  .money-inline{
+    font-size:1.2em;
     font-weight:700;
     white-space:nowrap;
   }
@@ -637,10 +643,9 @@
 <section class="visual-section timeline-section" aria-labelledby="timeline-onboarding-title">
   <div class="section-heading">
     <div>
-      <div class="section-heading-kicker">Acompanhamento do cliente</div>
-      <h2 id="timeline-onboarding-title">Timeline de reuniões do onboarding</h2>
+      <div class="section-heading-kicker">Timeline</div>
+      <h2 id="timeline-onboarding-title">Reuniões do Onboarding</h2>
     </div>
-    <p>As reuniões acompanham a evolução do cliente e acontecem paralelamente ao fluxo operacional de abertura.</p>
   </div>
 
   <div class="timeline-shell">
@@ -649,16 +654,16 @@
         <h3>Reunião de<br>Boas-vindas</h3>
       </article>
 
-      <div class="timeline-connector" aria-label="Prazo de 15 dias úteis">
-        <span class="timeline-deadline">15 dias úteis</span>
+      <div class="timeline-connector" aria-label="30 Dias Corrido">
+        <span class="timeline-deadline">30 Dias Corridos</span>
       </div>
 
       <article class="timeline-step" data-step="2" role="listitem">
         <h3>Reunião de<br>Direcionamento</h3>
       </article>
 
-      <div class="timeline-connector" aria-label="Prazo de 15 dias úteis">
-        <span class="timeline-deadline">15 dias úteis</span>
+      <div class="timeline-connector" aria-label="Prazo de 30 dias Corridos">
+        <span class="timeline-deadline">30 dias Corridos</span>
       </div>
 
       <article class="timeline-step timeline-step-end" data-step="3" role="listitem">
@@ -724,9 +729,6 @@
         <rect class="deadline-box" x="1458" y="74" width="104" height="34" rx="17"/>
         <text class="deadline-text" x="1510" y="96" font-size="13">5 dias úteis</text>
 
-        <rect class="deadline-box" x="1730" y="335" width="94" height="34" rx="17"/>
-        <text class="deadline-text" x="1777" y="357" font-size="14">Deferido</text>
-
         <rect class="deadline-box" x="1458" y="382" width="104" height="34" rx="17"/>
         <text class="deadline-text" x="1510" y="404" font-size="13">5 dias úteis</text>
 
@@ -738,15 +740,13 @@
 
         <rect class="deadline-box" x="677" y="588" width="116" height="34" rx="17"/>
         <text class="deadline-text" x="735" y="610" font-size="13">25 dias úteis</text>
-
-        <rect class="deadline-box" x="1036" y="742" width="116" height="34" rx="17"/>
-        <text class="deadline-text" x="1094" y="764" font-size="13">25 dias úteis</text>
       </g>
 
       <!-- NÓS: PRIMEIRA LINHA -->
       <g>
         <polygon filter="url(#softShadow)" points="580,40 720,170 580,300 440,170" fill="var(--orange)"/>
-        <text class="node-title" x="580" y="154" text-anchor="middle" font-size="18" fill="#3B2100">Protocolo da</text>
+        <text class="node-title" x="580" y="130" text-anchor="middle" font-size="18" fill="#3B2100">Inicio</text>
+        <text class="node-title" x="580" y="154" text-anchor="middle" font-size="18" fill="#3B2100">do Processo na</text>
         <text class="node-title" x="580" y="178" text-anchor="middle" font-size="18" fill="#3B2100">Junta Comercial</text>
       </g>
 
@@ -755,7 +755,7 @@
         <circle class="node-info-icon" cx="1063" cy="134" r="14" fill="#3450E6"/>
         <text class="node-info-icon node-title" x="1063" y="140" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="970" y="154" text-anchor="middle" font-size="19" fill="var(--ink)">Taxa de Abertura</text>
-        <text class="node-sub" x="970" y="184" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 218,00</text>
+        <text class="node-sub" x="970" y="194" text-anchor="middle" font-size="26" fill="#8A6B0F">R$ 218,00</text>
       </g>
 
       <g>
@@ -766,8 +766,8 @@
 
       <g>
         <polygon filter="url(#softShadow)" points="1700,40 1840,170 1700,300 1560,170" fill="var(--orange)"/>
-        <text class="node-title" x="1700" y="154" text-anchor="middle" font-size="18" fill="#3B2100">Processo</text>
-        <text class="node-title" x="1700" y="178" text-anchor="middle" font-size="18" fill="#3B2100">Deferido?</text>
+        <text class="node-title" x="1700" y="154" text-anchor="middle" font-size="26" fill="#3B2100">Processo</text>
+        <text class="node-title" x="1700" y="198" text-anchor="middle" font-size="26" fill="#3B2100">Deferido</text>
       </g>
 
       <!-- NÓS: SEGUNDA LINHA -->
@@ -787,21 +787,22 @@
         <rect filter="url(#softShadow)" x="850" y="425" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
         <circle class="node-info-icon" cx="1063" cy="449" r="14" fill="#3450E6"/>
         <text class="node-info-icon node-title" x="1063" y="455" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
-        <text class="node-title" x="970" y="462" text-anchor="middle" font-size="17" fill="var(--ink)">Certificado Digital</text>
-        <text class="node-title" x="970" y="486" text-anchor="middle" font-size="17" fill="var(--ink)">e Procuração</text>
+        <text class="node-title" x="970" y="476" text-anchor="middle" font-size="18" fill="var(--ink)">Certificado Digital</text>
+        <text class="node-title" x="970" y="502" text-anchor="middle" font-size="18" fill="var(--ink)">e Procuração</text>
       </g>
 
       <g>
         <rect filter="url(#softShadow)" x="440" y="425" width="280" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
-        <text class="node-title" x="580" y="468" text-anchor="middle" font-size="17" fill="var(--ink)">Solicitação do</text>
-        <text class="node-title" x="580" y="493" text-anchor="middle" font-size="17" fill="var(--ink)">Certificado Digital</text>
+        <text class="node-title" x="580" y="478" text-anchor="middle" font-size="18" fill="var(--ink)">Solicitação da</text>
+        <text class="node-title" x="580" y="500" text-anchor="middle" font-size="18" fill="var(--ink)">Inscrição Municipal</text>
       </g>
 
       <!-- NÓS: TERCEIRA LINHA -->
       <g>
         <polygon filter="url(#softShadow)" points="890,720 1030,850 890,980 750,850" fill="var(--orange)"/>
-        <text class="node-title" x="890" y="835" text-anchor="middle" font-size="18" fill="#3B2100">Inscrição</text>
-        <text class="node-title" x="890" y="859" text-anchor="middle" font-size="18" fill="#3B2100">Municipal</text>
+        <text class="node-title" x="890" y="820" text-anchor="middle" font-size="22" fill="#3B2100">Inscrição</text>
+        <text class="node-title" x="890" y="850" text-anchor="middle" font-size="22" fill="#3B2100">Municipal</text>
+        <text class="node-title" x="890" y="880" text-anchor="middle" font-size="22" fill="#3B2100">Liberada</text>
       </g>
 
       <g>
@@ -813,33 +814,36 @@
       <!-- RAMIFICAÇÕES MUNICIPAIS -->
       <g>
         <rect filter="url(#softShadow)" x="1500" y="635" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
-        <text class="node-title" x="1620" y="681" text-anchor="middle" font-size="18" fill="var(--ink)">Funcionamento</text>
-        <text class="node-sub" x="1620" y="711" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 474,00</text>
+        <text class="node-title" x="1620" y="660" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa de</text>
+        <text class="node-title" x="1620" y="690" text-anchor="middle" font-size="18" fill="var(--ink)">Funcionamento</text>
+        <text class="node-sub" x="1620" y="740" text-anchor="middle" font-size="22" fill="#8A6B0F">R$ 474,00</text>
       </g>
 
       <g>
         <rect filter="url(#softShadow)" x="1500" y="790" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
-        <text class="node-title" x="1620" y="836" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa Mobiliária</text>
-        <text class="node-sub" x="1620" y="866" text-anchor="middle" font-size="17" fill="#8A6B0F">R$ 118,50</text>
+        <text class="node-title" x="1620" y="815" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa</text>
+        <text class="node-title" x="1620" y="845" text-anchor="middle" font-size="18" fill="var(--ink)">Mobiliária</text>
+        <text class="node-sub" x="1620" y="895" text-anchor="middle" font-size="22" fill="#8A6B0F">R$ 118,50</text>
       </g>
 
       <g>
         <rect filter="url(#softShadow)" x="1500" y="945" width="240" height="120" rx="20" fill="var(--gold-soft)" stroke="var(--gold-line)" stroke-width="2"/>
-        <text class="node-title" x="1620" y="991" text-anchor="middle" font-size="18" fill="var(--ink)">Publicidade</text>
-        <text class="node-sub" x="1620" y="1021" text-anchor="middle" font-size="17" fill="#B7754B" text-decoration="line-through">R$ 226,00</text>
+        <text class="node-title" x="1620" y="970" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa</text>
+        <text class="node-title" x="1620" y="1000" text-anchor="middle" font-size="18" fill="var(--ink)">Publicidade</text>
+        <text class="node-sub" x="1620" y="1050" text-anchor="middle" font-size="22" fill="#B7754B" text-decoration="line-through">R$ 226,00</text>
       </g>
 
       <g>
         <rect filter="url(#softShadow)" x="1880" y="945" width="230" height="120" rx="20" fill="var(--navy)"/>
-        <text class="node-title" x="1995" y="988" text-anchor="middle" font-size="18" fill="#F2C34D">Bônus</text>
-        <text class="node-title" x="1995" y="1015" text-anchor="middle" font-size="16" fill="#FFFFFF">Isenção de</text>
-        <text class="node-title" x="1995" y="1037" text-anchor="middle" font-size="16" fill="#FFFFFF">Publicidade</text>
+        <text class="node-title" x="1995" y="985" text-anchor="middle" font-size="22" fill="#FFFFFF">Isenção</text>
+        <text class="node-title" x="1995" y="1015" text-anchor="middle" font-size="22" fill="#FFFFFF">de</text>
+        <text class="node-title" x="1995" y="1045" text-anchor="middle" font-size="22" fill="#FFFFFF">Publicidade</text>
       </g>
 
       <g>
         <rect filter="url(#softShadow)" x="1840" y="780" width="320" height="140" rx="70" fill="var(--green)"/>
-        <text class="node-title" x="2000" y="830" text-anchor="middle" font-size="20" fill="#FFFFFF">Processo Finalizado</text>
-        <text class="node-title" x="2000" y="858" text-anchor="middle" font-size="20" fill="#FFFFFF">e Empresa Apta</text>
+        <text class="node-title" x="2000" y="840" text-anchor="middle" font-size="38" fill="#FFFFFF">Processo</text>
+        <text class="node-title" x="2000" y="880" text-anchor="middle" font-size="38" fill="#FFFFFF"> Finalizado</text>
       </g>
       </svg>
     </div>
@@ -916,7 +920,7 @@
       <div class="cost-row waived">
         <div>
           <div class="cost-name">Taxa de Publicidade</div>
-          <div class="cost-detail">Prefeitura Municipal — custo de R$ 226,00 assumido pela Conta Junto como bônus.</div>
+          <div class="cost-detail">Prefeitura Municipal <> custo de <span class="money-inline">R$ 226,00</span></div>
         </div>
         <div class="cost-value">R$ 226,00</div>
       </div>
@@ -928,9 +932,8 @@
     </div>
 
     <aside class="bonus-card">
-      <h3>Bônus Conta Junto</h3>
-      <p>Como parte do onboarding, a Conta Junto assume o custo da taxa municipal de publicidade. Dessa forma, o investimento total é reduzido de R$ 1.036,50 para R$ 810,50.</p>
-      <span class="bonus-badge">Economia de R$ 226,00</span>
+      <h3>Etapa Conta Junto Assessoria Contábil</h3>
+      <p>Como parte do processo de integração da Conta Junto Assessoria Contábil, realizamos a solicitação de Isenção da Taxa de Publicidade junto à Prefeitura. Esse serviço é feito como cortesia, sem custos adicionais para a sua empresa.</p>
     </aside>
   </div>
 </section>
