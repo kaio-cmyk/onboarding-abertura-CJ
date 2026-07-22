@@ -444,14 +444,20 @@
   }
 
   .tax-node rect,
-  .certificate-node rect{
+  .certificate-node rect,
+  .tax-node polygon,
+  .certificate-node polygon{
     transition:stroke .2s ease, stroke-width .2s ease, filter .2s ease;
   }
 
   .tax-node:hover rect,
   .tax-node:focus rect,
   .certificate-node:hover rect,
-  .certificate-node:focus rect{
+  .certificate-node:focus rect,
+  .tax-node:hover polygon,
+  .tax-node:focus polygon,
+  .certificate-node:hover polygon,
+  .certificate-node:focus polygon{
     stroke:#3450E6;
     stroke-width:5;
     filter:url(#softShadow);
@@ -512,6 +518,18 @@
     color:var(--navy);
   }
 
+  .info-modal-card h3{
+    margin:22px 0 10px;
+    font-family:'Sora',sans-serif;
+    font-size:16px;
+    line-height:1.3;
+    color:var(--navy);
+  }
+
+  .info-modal-card h3:first-of-type{
+    margin-top:4px;
+  }
+
   .info-modal-card p{
     margin:0 0 16px;
     color:#434B68;
@@ -519,7 +537,20 @@
     line-height:1.78;
   }
 
-  .info-modal-card p:last-child{
+  .info-modal-card ul{
+    margin:0 0 16px;
+    padding-left:20px;
+    color:#434B68;
+    font-size:14px;
+    line-height:1.78;
+  }
+
+  .info-modal-card li{
+    margin-bottom:6px;
+  }
+
+  .info-modal-card p:last-child,
+  .info-modal-card ul:last-child{
     margin-bottom:0;
   }
 
@@ -743,11 +774,14 @@
       </g>
 
       <!-- NÓS: PRIMEIRA LINHA -->
-      <g>
+      <g id="inicioProcessoNode" class="tax-node" role="button" tabindex="0" aria-label="Início do Processo na Junta Comercial. Clique para ver documentos e informações necessárias.">
         <polygon filter="url(#softShadow)" points="580,40 720,170 580,300 440,170" fill="var(--orange)"/>
-        <text class="node-title" x="580" y="130" text-anchor="middle" font-size="18" fill="#3B2100">Inicio</text>
-        <text class="node-title" x="580" y="154" text-anchor="middle" font-size="18" fill="#3B2100">do Processo na</text>
-        <text class="node-title" x="580" y="178" text-anchor="middle" font-size="18" fill="#3B2100">Junta Comercial</text>
+        <circle class="node-info-icon" cx="628" cy="100" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="628" y="106" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
+        <text class="node-title" x="580" y="125" text-anchor="middle" font-size="26" fill="#3B2100">Inicio</text>
+        <text class="node-title" x="580" y="165" text-anchor="middle" font-size="26" fill="#3B2100">Junta</text>
+        <text class="node-title" x="580" y="205" text-anchor="middle" font-size="26" fill="#3B2100">Comercial</text>
+
       </g>
 
       <g id="taxaAberturaNode" class="tax-node" role="button" tabindex="0" aria-label="Taxa de Abertura. Clique para entender o DARE.">
@@ -758,8 +792,10 @@
         <text class="node-sub" x="970" y="194" text-anchor="middle" font-size="26" fill="#8A6B0F">R$ 218,00</text>
       </g>
 
-      <g>
+      <g id="assinaturaDocumentosNode" class="tax-node" role="button" tabindex="0" aria-label="Assinatura Digital dos Documentos. Clique para entender o Contrato Social e a Declaração de Licenciamento.">
         <rect filter="url(#softShadow)" x="1220" y="110" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1433" cy="134" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1433" y="140" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1340" y="151" text-anchor="middle" font-size="18" fill="var(--ink)">Assinatura Digital</text>
         <text class="node-title" x="1340" y="176" text-anchor="middle" font-size="18" fill="var(--ink)">dos Documentos</text>
       </g>
@@ -771,14 +807,18 @@
       </g>
 
       <!-- NÓS: SEGUNDA LINHA -->
-      <g>
+      <g id="assinaturaCnpjNode" class="tax-node" role="button" tabindex="0" aria-label="Assinatura Digital do CNPJ. Clique para entender essa etapa.">
         <rect filter="url(#softShadow)" x="1560" y="425" width="280" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1793" cy="449" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1793" y="455" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1700" y="468" text-anchor="middle" font-size="18" fill="var(--ink)">Assinatura Digital</text>
         <text class="node-title" x="1700" y="493" text-anchor="middle" font-size="18" fill="var(--ink)">do CNPJ</text>
       </g>
 
-      <g>
+      <g id="contratoServicosNode" class="tax-node" role="button" tabindex="0" aria-label="Assinar Contrato de Serviços. Clique para entender essa etapa.">
         <rect filter="url(#softShadow)" x="1220" y="425" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1433" cy="449" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1433" y="455" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1340" y="468" text-anchor="middle" font-size="18" fill="var(--ink)">Assinar Contrato</text>
         <text class="node-title" x="1340" y="493" text-anchor="middle" font-size="18" fill="var(--ink)">de Serviços</text>
       </g>
@@ -791,8 +831,10 @@
         <text class="node-title" x="970" y="502" text-anchor="middle" font-size="18" fill="var(--ink)">e Procuração</text>
       </g>
 
-      <g>
+      <g id="inscricaoMunicipalNode" class="tax-node" role="button" tabindex="0" aria-label="Solicitação da Inscrição Municipal. Clique para entender essa etapa.">
         <rect filter="url(#softShadow)" x="440" y="425" width="280" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="673" cy="449" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="673" y="455" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="580" y="478" text-anchor="middle" font-size="18" fill="var(--ink)">Solicitação da</text>
         <text class="node-title" x="580" y="500" text-anchor="middle" font-size="18" fill="var(--ink)">Inscrição Municipal</text>
       </g>
@@ -800,9 +842,9 @@
       <!-- NÓS: TERCEIRA LINHA -->
       <g>
         <polygon filter="url(#softShadow)" points="890,720 1030,850 890,980 750,850" fill="var(--orange)"/>
-        <text class="node-title" x="890" y="820" text-anchor="middle" font-size="22" fill="#3B2100">Inscrição</text>
-        <text class="node-title" x="890" y="850" text-anchor="middle" font-size="22" fill="#3B2100">Municipal</text>
-        <text class="node-title" x="890" y="880" text-anchor="middle" font-size="22" fill="#3B2100">Liberada</text>
+        <text class="node-title" x="890" y="810" text-anchor="middle" font-size="26" fill="#3B2100">Inscrição</text>
+        <text class="node-title" x="890" y="850" text-anchor="middle" font-size="26" fill="#3B2100">Municipal</text>
+        <text class="node-title" x="890" y="890" text-anchor="middle" font-size="26" fill="#3B2100">Liberada</text>
       </g>
 
       <g>
@@ -812,22 +854,28 @@
       </g>
 
       <!-- RAMIFICAÇÕES MUNICIPAIS -->
-      <g>
+      <g id="taxaFuncionamentoNode" class="tax-node" role="button" tabindex="0" aria-label="Taxa de Funcionamento. Clique para entender essa taxa.">
         <rect filter="url(#softShadow)" x="1500" y="635" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1713" cy="659" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1713" y="665" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1620" y="660" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa de</text>
         <text class="node-title" x="1620" y="690" text-anchor="middle" font-size="18" fill="var(--ink)">Funcionamento</text>
         <text class="node-sub" x="1620" y="740" text-anchor="middle" font-size="22" fill="#8A6B0F">R$ 474,00</text>
       </g>
 
-      <g>
+      <g id="taxaMobiliariaNode" class="tax-node" role="button" tabindex="0" aria-label="Taxa Mobiliária. Clique para entender essa taxa.">
         <rect filter="url(#softShadow)" x="1500" y="790" width="240" height="120" rx="20" fill="var(--blue-soft)" stroke="var(--blue-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1713" cy="814" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1713" y="820" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1620" y="815" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa</text>
         <text class="node-title" x="1620" y="845" text-anchor="middle" font-size="18" fill="var(--ink)">Mobiliária</text>
         <text class="node-sub" x="1620" y="895" text-anchor="middle" font-size="22" fill="#8A6B0F">R$ 118,50</text>
       </g>
 
-      <g>
+      <g id="taxaPublicidadeNode" class="tax-node" role="button" tabindex="0" aria-label="Taxa de Publicidade. Clique para entender essa taxa.">
         <rect filter="url(#softShadow)" x="1500" y="945" width="240" height="120" rx="20" fill="var(--gold-soft)" stroke="var(--gold-line)" stroke-width="2"/>
+        <circle class="node-info-icon" cx="1713" cy="969" r="14" fill="#3450E6"/>
+        <text class="node-info-icon node-title" x="1713" y="975" text-anchor="middle" font-size="16" fill="#FFFFFF">i</text>
         <text class="node-title" x="1620" y="970" text-anchor="middle" font-size="18" fill="var(--ink)">Taxa</text>
         <text class="node-title" x="1620" y="1000" text-anchor="middle" font-size="18" fill="var(--ink)">Publicidade</text>
         <text class="node-sub" x="1620" y="1050" text-anchor="middle" font-size="22" fill="#B7754B" text-decoration="line-through">R$ 226,00</text>
@@ -842,13 +890,137 @@
 
       <g>
         <rect filter="url(#softShadow)" x="1840" y="780" width="320" height="140" rx="70" fill="var(--green)"/>
-        <text class="node-title" x="2000" y="840" text-anchor="middle" font-size="38" fill="#FFFFFF">Processo</text>
-        <text class="node-title" x="2000" y="880" text-anchor="middle" font-size="38" fill="#FFFFFF"> Finalizado</text>
+        <text class="node-title" x="2000" y="840" text-anchor="middle" font-size="26" fill="#FFFFFF">Processo</text>
+        <text class="node-title" x="2000" y="880" text-anchor="middle" font-size="26" fill="#FFFFFF"> Finalizado</text>
       </g>
       </svg>
     </div>
   </div>
 </section>
+
+<div id="inicioModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="inicioModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeInicioModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Etapa inicial</div>
+    <h2 id="inicioModalTitle">Documentos e Informações para Abertura de CNPJ</h2>
+
+    <p>Para iniciarmos o processo de abertura da sua empresa, precisamos de algumas informações e documentos. Esses dados são essenciais para a elaboração do contrato social, definição correta das atividades e realização dos registros junto aos órgãos competentes.</p>
+
+    <h3>Documentos dos Sócios</h3>
+    <ul>
+      <li>Documento de identificação (RG e CPF ou CNH) de todos os sócios;</li>
+      <li>Certidão de casamento (se aplicável);</li>
+      <li>Comprovante de endereço atualizado.</li>
+    </ul>
+
+    <h3>Dados da Empresa</h3>
+    <ul>
+      <li>Razão Social;</li>
+      <li>Nome Fantasia (caso desejem utilizar);</li>
+      <li>Capital Social (valor investido pelos sócios para iniciar a empresa);</li>
+      <li>E-mail de contato;</li>
+      <li>Telefone de contato.</li>
+    </ul>
+
+    <h3>Atividades da Empresa</h3>
+    <ul>
+      <li>Descrição detalhada das atividades que serão exercidas. Quanto mais informações, melhor será o enquadramento das atividades (CNAEs) e dos tributos.</li>
+    </ul>
+
+    <h3>Informações Societárias</h3>
+    <ul>
+      <li>Percentual de participação de cada sócio no capital social (ex.: 50% para cada um);</li>
+      <li>Definição do(s) sócio(s) administrador(es), responsável(is) pela gestão da empresa;</li>
+      <li>Indicação do sócio representante perante a Receita Federal.</li>
+    </ul>
+
+    <p>Assim que recebermos todas as informações, daremos continuidade aos trâmites de abertura e acompanharemos cada etapa até a liberação do CNPJ.</p>
+  </div>
+</div>
+
+<div id="assinaturaModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="assinaturaModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeAssinaturaModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Documentos assinados digitalmente</div>
+    <h2 id="assinaturaModalTitle">Assinatura Digital dos Documentos</h2>
+
+    <h3>1. Contrato Social</h3>
+    <p>É a "certidão de nascimento" da empresa.</p>
+    <ul>
+      <li><strong>O que é:</strong> O documento legal que oficializa a criação da Pessoa Jurídica (PJ) e define as regras do negócio.</li>
+      <li><strong>Para que serve:</strong> Comprova quem são os sócios, qual a participação/porcentagem de cada um, as atividades exercidas (CNAEs), o endereço oficial, a capital social da empresa e quem responde legalmente por ela.</li>
+      <li><strong>Onde é usado:</strong> Para abrir conta bancária PJ, pedir empréstimos, assinar contratos importantes, entrar em licitações e cadastros diversos.</li>
+    </ul>
+
+    <h3>2. Declaração de Licenciamento</h3>
+    <p>É o documento que comprova que a empresa está autorizada pela Prefeitura e órgãos fiscalizadores a funcionar em seu endereço.</p>
+    <ul>
+      <li><strong>O que é:</strong> Uma declaração emitida pela Prefeitura (geralmente acompanhada da consulta do CLI/Alvará) atestando que a empresa cumpriu os requisitos de zoneamento, vigilância sanitária, meio ambiente e corpo de bombeiros.</li>
+      <li><strong>Para que serve:</strong> Atesta que o local e as atividades da empresa estão regulares perante o município e aptos para funcionamento.</li>
+      <li><strong>Onde é usado:</strong> Exigido por fiscalizações municipais, bancos para concessão de crédito e por alguns contratantes/clientes que precisam checar a regularidade do seu negócio.</li>
+    </ul>
+  </div>
+</div>
+
+<div id="assinaturaCnpjModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="assinaturaCnpjModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeAssinaturaCnpjModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Etapa de formalização</div>
+    <h2 id="assinaturaCnpjModalTitle">Assinatura Digital do CNPJ</h2>
+
+    <p>Nesta etapa, o contrato/documentação de constituição é assinado eletronicamente por você (cliente/sócio) e pelo nosso responsável (Contador). Essa dupla assinatura é o protocolo legal necessário para acionar a Junta Comercial e a Receita Federal, liberando oficialmente a emissão do seu CNPJ.</p>
+  </div>
+</div>
+
+<div id="contratoServicosModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="contratoServicosModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeContratoServicosModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Formalização do vínculo</div>
+    <h2 id="contratoServicosModalTitle">Assinar Contrato de Serviços</h2>
+
+    <p>Esta é a etapa de formalização do vínculo entre a sua empresa e a nossa contabilidade, definindo com clareza os direitos, deveres e todos os serviços contábeis prestados.</p>
+  </div>
+</div>
+
+<div id="inscricaoMunicipalModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="inscricaoMunicipalModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeInscricaoMunicipalModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Registro municipal</div>
+    <h2 id="inscricaoMunicipalModalTitle">Solicitação da Inscrição Municipal</h2>
+
+    <p>Após a emissão do CNPJ pela Receita Federal, é preciso registrar sua empresa no município. A Inscrição Municipal é indispensável para que a empresa fique legalizada perante a prefeitura local e possa emitir Notas Fiscais de Serviços (NFS-e).</p>
+  </div>
+</div>
+
+<div id="taxaFuncionamentoModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="taxaFuncionamentoModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeTaxaFuncionamentoModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Detalhamento da taxa</div>
+    <h2 id="taxaFuncionamentoModalTitle">Taxa de Funcionamento</h2>
+
+    <p>Taxa de Funcionamento (TFA / TFE): Taxa devida pelo licenciamento de localização e funcionamento da empresa (ex: R$ 474,00).</p>
+  </div>
+</div>
+
+<div id="taxaMobiliariaModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="taxaMobiliariaModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeTaxaMobiliariaModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Detalhamento da taxa</div>
+    <h2 id="taxaMobiliariaModalTitle">Taxa Mobiliária</h2>
+
+    <p>Taxa referente ao cadastro e manutenção do registro mobiliário no município (ex: R$ 118,50).</p>
+  </div>
+</div>
+
+<div id="taxaPublicidadeModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="taxaPublicidadeModalTitle" hidden>
+  <div class="info-modal-card">
+    <button id="closeTaxaPublicidadeModal" class="info-modal-close" type="button" aria-label="Fechar explicação">×</button>
+    <div class="info-modal-kicker">Detalhamento da taxa</div>
+    <h2 id="taxaPublicidadeModalTitle">Taxa de Publicidade</h2>
+
+    <p>Taxa cobrada caso a empresa utilize anúncios, placas ou fachadas. Caso sua empresa não utilize publicidade externa, solicitamos a Isenção de Publicidade, economizando esse custo (ex: isenção do valor de R$ 226,00).</p>
+  </div>
+</div>
 
 <div id="dareModal" class="info-modal" role="dialog" aria-modal="true" aria-labelledby="dareModalTitle" hidden>
   <div class="info-modal-card">
@@ -975,6 +1147,54 @@
     return { modal, closeModal };
   }
 
+  const inicioInfo = configureInfoModal({
+    triggerId: 'inicioProcessoNode',
+    modalId: 'inicioModal',
+    closeButtonId: 'closeInicioModal'
+  });
+
+  const assinaturaInfo = configureInfoModal({
+    triggerId: 'assinaturaDocumentosNode',
+    modalId: 'assinaturaModal',
+    closeButtonId: 'closeAssinaturaModal'
+  });
+
+  const assinaturaCnpjInfo = configureInfoModal({
+    triggerId: 'assinaturaCnpjNode',
+    modalId: 'assinaturaCnpjModal',
+    closeButtonId: 'closeAssinaturaCnpjModal'
+  });
+
+  const contratoServicosInfo = configureInfoModal({
+    triggerId: 'contratoServicosNode',
+    modalId: 'contratoServicosModal',
+    closeButtonId: 'closeContratoServicosModal'
+  });
+
+  const inscricaoMunicipalInfo = configureInfoModal({
+    triggerId: 'inscricaoMunicipalNode',
+    modalId: 'inscricaoMunicipalModal',
+    closeButtonId: 'closeInscricaoMunicipalModal'
+  });
+
+  const taxaFuncionamentoInfo = configureInfoModal({
+    triggerId: 'taxaFuncionamentoNode',
+    modalId: 'taxaFuncionamentoModal',
+    closeButtonId: 'closeTaxaFuncionamentoModal'
+  });
+
+  const taxaMobiliariaInfo = configureInfoModal({
+    triggerId: 'taxaMobiliariaNode',
+    modalId: 'taxaMobiliariaModal',
+    closeButtonId: 'closeTaxaMobiliariaModal'
+  });
+
+  const taxaPublicidadeInfo = configureInfoModal({
+    triggerId: 'taxaPublicidadeNode',
+    modalId: 'taxaPublicidadeModal',
+    closeButtonId: 'closeTaxaPublicidadeModal'
+  });
+
   const dareInfo = configureInfoModal({
     triggerId: 'taxaAberturaNode',
     modalId: 'dareModal',
@@ -990,6 +1210,14 @@
   document.addEventListener('keydown', event => {
     if (event.key !== 'Escape') return;
 
+    if (!inicioInfo.modal.hidden) inicioInfo.closeModal();
+    if (!assinaturaInfo.modal.hidden) assinaturaInfo.closeModal();
+    if (!assinaturaCnpjInfo.modal.hidden) assinaturaCnpjInfo.closeModal();
+    if (!contratoServicosInfo.modal.hidden) contratoServicosInfo.closeModal();
+    if (!inscricaoMunicipalInfo.modal.hidden) inscricaoMunicipalInfo.closeModal();
+    if (!taxaFuncionamentoInfo.modal.hidden) taxaFuncionamentoInfo.closeModal();
+    if (!taxaMobiliariaInfo.modal.hidden) taxaMobiliariaInfo.closeModal();
+    if (!taxaPublicidadeInfo.modal.hidden) taxaPublicidadeInfo.closeModal();
     if (!dareInfo.modal.hidden) dareInfo.closeModal();
     if (!certificadoInfo.modal.hidden) certificadoInfo.closeModal();
   });
